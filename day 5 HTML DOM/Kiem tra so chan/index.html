@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>nhap so</h2>
+    <input type="number" id="input-number">
+    <button id="checkBtn">kiểm tra</button>
+    <br/>
+    <div id="result"></div>
+    <script>
+        let inputNumber = document.getElementById('input-number');
+        let result = document.getElementById('result');
+        let checkBtn = document.getElementById('checkBtn');
+        checkBtn.addEventListener('click',function() {
+            let number=parseInt(inputNumber.value);
+            let isEven=number%2==0? "even":"odd";
+            result.innerText = number + " is " + isEven;
+            console.log(isInt(number));
+        })
+    </script>
+</body>
+</html>

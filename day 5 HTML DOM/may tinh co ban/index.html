@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Caculator</h1> 
+    <input type="number" id="o1">
+    <input type="number" id="o2">
+</br>
+    <button id="nut1">addition(+)</button>
+    <button id="nut2">subtraction(-)</button>
+    <button id="nut3">multiplication(x)</button>
+    <button id="nut4">division(/)</button>
+    <div id="result"></div>
+    <script>
+        let o1 = document.getElementById('o1')
+        let o2 = document.getElementById('o2')
+        let nut1 = document.getElementById('nut1')
+        let nut2 = document.getElementById('nut2')
+        let nut3 = document.getElementById('nut3')
+        let nut4 = document.getElementById('nut4')
+        let result = document.getElementById('result') 
+        let x1,x2
+        o1.addEventListener('change', function(){
+           x1=parseFloat(o1.value);
+         });
+        o2.addEventListener('change', function(){
+           x2=parseFloat(o2.value);
+        });
+        nut1.addEventListener('click', function(){
+            result.innerText= x1 +"+"+ x2 +"="+(x1+x2);
+        });
+        nut2.addEventListener('click', function(){
+            result.innerText =x1+"-"+x2+"="+(x1-x2);
+        });
+        nut3.addEventListener('click', function(){
+             result.innerText =x1+"x"+x2+"="+(x1*x2);});
+        nut4.addEventListener('click', function(){
+            result.innerText = x1+":"+x2+"="+(x1/x2);
+        });
+        
+    </script>
+</body>
+</html>
