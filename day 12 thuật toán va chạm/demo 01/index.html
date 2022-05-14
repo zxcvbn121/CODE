@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="js/rect.js"></script>
+    <script>
+        let rect1= new Rect(10, 20, 200, 100);
+        let rect2= new Rect(220, 130, 200, 200);
+        function isCollision(rect1, rect2) {
+    let distX = (rect1.x + (rect1.w/2)) - (rect2.x + (rect2.w)/2);
+    if (distX < 0)
+        distX = -distX;
+
+    const distW = (rect1.w + rect2.w)/2;
+
+    let distY =(rect1.y + (rect1.h/2)) - (rect2.y + (rect2.h)/2);
+    if(distY < 0)
+        distY = -distY;
+
+    const distH = (rect1.h + rect2.h)/2;
+
+    return (distX <= distW && distY <= distH);
+}
+    </script>
+</body>
+</html>

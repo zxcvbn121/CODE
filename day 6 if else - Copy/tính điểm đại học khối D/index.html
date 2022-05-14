@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tính điểm thi ĐH</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="card my-3 mx-auto" style="width: 30rem">
+      <div class="card-body">
+        <form id="tinhdiem">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Điểm môn Toán</span>
+            <input
+              type="number" min="0" max="10"
+              class="form-control"
+              onkeyup="updateGrade('toan', this)"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Điểm môn Văn</span>
+            <input
+              type="number" min="0" max="10"
+              class="form-control"
+              onkeyup="updateGrade('van', this)"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Điểm môn tiếng Anh</span>
+            <input
+              type="number" min="0" max="10"
+              class="form-control"
+              onkeyup="updateGrade('anh', this)"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="khuvuc">Khu vực của bạn</label>
+            <select class="form-select" id="khuvuc">
+              <option value="0">Chọn khu vực</option>
+              <option value="0.75">Khu vực 1</option>
+              <option value="0.5">Khu vực 2</option>
+              <option value="0.25">Khu vực 2- NT</option>
+              <option value="3">Khu vực 3</option>
+            </select>
+          </div>
+          <p id="returnText" class="my-5"></p>
+        </form>
+      </div>
+    </div>
+    <script>
+      var van, toan, anh;
+      var khuvuc    = document.getElementById("khuvuc");
+      var tinhdiem  = document.getElementById('tinhdiem');
+      var returnText= document.getElementById("returnText");
+
+      function updateGrade(name, obj) {
+        switch (name) {
+          case 'toan':
+            toan = parseFloat(obj.value);
+            break;
+          case 'van':
+            van = parseFloat(obj.value);
+            break;
+          case 'anh':
+            anh = parseFloat(obj.value);
+            break;
+          default:
+            break;
+        }
+      }
+      tinhdiem.addEventListener("change", function () {
+              returnText.innerHTML = (toan + van + anh + parseFloat(khuvuc.value));
+      });
+    </script>
+  </body>
+</html>
