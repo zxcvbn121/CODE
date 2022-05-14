@@ -1,5 +1,5 @@
 class Circle {
-    constructor(x, y, radius, color = '#ffffff') {
+    constructor(x, y, radius, color = '#000000') {
         this.x = x;
         this.y = y;
         this.radius = radius;

@@ -8,12 +8,23 @@
     <title>Ball and bricks</title>
 </head>
 <body>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background: rgb(30, 82, 77);
+}
+    </style>
     <div class="container pt-5 text-center">
         <canvas id="gameCanvas" width="500" height="500" style="border: 1px solid black"></canvas>
-        <canvas id="gameCanvas" width="300" height="500" style="border: 1px solid black"></canvas>
+        <canvas id="gameCanvas1" width="300" height="500" style="border: 1px solid black"></canvas>
+    </div>
+    <div>
+        <audio controls autoplay> <source src='media/audio/nhacgame.mp3'></audio>
     </div>
     <script src="assets/js/Circle.js"></script>
     <script src="assets/js/Rect.js"></script>
+    
     <script>
         let mainFrame = document.getElementById('gameCanvas');
         let gameContext = mainFrame.getContext("2d");
@@ -24,10 +35,11 @@
         let paddleCurrentY = mainFrame.height - 45;
         let paddle = new Rect(paddleCurrentX, paddleCurrentY, 200, 20, "#ff0000");
 
+
         // khai bao qua bong
         let ballCurrentX = mainFrame.width / 2 ;
         let ballCurrentY = mainFrame.height -70;
-        let ball = new Circle(ballCurrentX, ballCurrentY, 10, '#00ff00');
+        let ball = new Circle(ballCurrentX, ballCurrentY, 10, '#ff00000');
 
         // cac vien gach
         var BrickConfig = { 
@@ -47,10 +59,13 @@
                 BrickList.push({
                     x: BrickConfig.offsetX + j*(BrickConfig.width + BrickConfig.margin),
                     y: BrickConfig.offsetY + i*(BrickConfig.height + BrickConfig.margin),
-                    isBroken: true
+                    isBroken: false
                 });
             }
         }
+        
+        var isGameWin=false;
+        var userScore=0;
 
         // ve paddle
         function drawPaddle() {
@@ -73,7 +88,7 @@
         // ve gach 
         function drawBricks() {
            BrickList.forEach(function(b){
-               if(b.isBroken){
+               if(!b.isBroken){
                     gameContext.beginPath();
                     gameContext.rect(b.x, b.y, BrickConfig.width, BrickConfig.height );
                     gameContext.fill();
@@ -120,11 +135,18 @@
         }
         function handleBallCollisionBricks() {
             BrickList.forEach(function(b){
-                if(b.isBroken){
-                   if(ball.getX() >=b.x || ball.getX() <= b.x+ BrickConfig.width || ball.getY() +ball.getRadius()>=b.y || 
-                   ball.getY() -ball.getRadius()<=b.y+BrickConfig.height);
-                   ball.reverseDistanceToY();
-                     b.isBroken=false; 
+                if(!b.isBroken){
+                   if(ball.getX() >=b.x &&
+                   ball.getX() <= b.x+ BrickConfig.width && 
+                   ball.getY() +ball.radius>=b.y && 
+                   ball.getY() -ball.getRadius()<=b.y+BrickConfig.height)
+                  { ball.reverseDistanceToY();
+                     b.isBroken=true;
+                     userScore +=1;
+                     if(userScore>=15){
+                         isGameWin=true;
+                     }
+                    } 
                 }
             });
             
@@ -146,6 +168,9 @@
                 requestAnimationFrame(play);
             } else {
                 alert("You lose!!!");
+            }
+            if(isGameWin){
+                alert("You Win!!!")
             }
 
         }
@@ -169,7 +194,22 @@
 
         play();
 
-       
     </script>
+    
+    <script>
+        var c = document.getElementById("gameCanvas1");
+        var ctx = c.getContext("2d");
+        ctx.font = "20px Arial";
+        ctx.fillStyle = 'gradient;';
+        ctx.fillText("BALL AND BRICKS GAME",10,50);
+        ctx.fillText("Người chơi di chuyển thanh ",12,70)
+        ctx.fillText("ngang bằng <- hoặc -> để hứng",12,90)
+        ctx.fillText("bóng, bóng nảy lên va chạm",12,110)
+        ctx.fillText("vào gạch và phá vỡ chúng",12,130)
+        ctx.fillText("Bạn thắng khi phá vớ hết gạch!!",12,150)
+        ctx.fillText("Nếu thanh ngang không hứng",12,170)
+        ctx.fillText("được bóng, bạn thua!!",12,190)
+    </script>
+
 </body>
 </html>

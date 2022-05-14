@@ -1,9 +1,0 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: rgb(41, 69, 80);
-}
-
-body canvas {
-    border: 1px solid #fff;
-}
